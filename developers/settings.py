@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'projects.apps.ProjectsConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -47,7 +48,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [ 
                   os.path.join(BASE_DIR,'Templates'),
-                  os.path.join(BASE_DIR,'projects/templates')],
+                  os.path.join(BASE_DIR,'projects/templates'),
+                  os.path.join(BASE_DIR,'users/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
