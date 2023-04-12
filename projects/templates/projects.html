@@ -31,17 +31,21 @@
         {% for item in projects %}
           <div class="column">
             <div class="card project">
-              <a href="#" class="project">
+              <a href="{% url 'single_project' item.title %}" class="project">
                 <img class="project__thumbnail" src="{{ item.featured_image.url }}" alt="project thumbnail" />
                 <div class="card__body">
                   <h3 class="project__title">{{ item.title }}</h3>
                   <p class="project--rating">
                     <span style="font-weight: bold;">{{item.vote_ratio}}%</span> Positive
                     Feedback ({{item.vote_total}} Vote{{item.vote_total|pluralize:"s"}})
-                  </p>
-                  
-                  
-
+                  </p> 
+                  <div class="project__tags">
+                    {% for tags in item.tags.all %}
+                    <span class="tag tag--pill tag--main">
+                      <small>{{tags}}</small>
+                    </span>
+                    {% endfor %} 
+                  </div>
                 </div>
               </a>
             </div>
