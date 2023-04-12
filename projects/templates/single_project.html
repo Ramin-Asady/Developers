@@ -39,6 +39,47 @@
               {{project.vote_ratio}}% Positive Feedback ({{project.vote_total}} Vote{{project.vote_total|pluralize:"s"}} )
             </h5>
 
+            {% if user.is_authenticated %}
+               {% if project.owner != profile %}
+                    <form action="{% url 'single_project' project.title %}" method="POST">
+                        <!-- Textarea -->
+                        {% csrf_token %}
+                        {% for field in form %}
+                        <div class="form__field"> 
+                          <label for="formInput#text"> {{field.label}} </label>
+                          {{field}}  
+                        </div>
+                        {% endfor %}
+                        
+                        <input class="btn btn--sub btn--lg" type="submit" value="Comments" />
+                  </form>
+               {% else %}
+                    <p>Your project has {{Number_of_reviewers}} reviewers</p>
+               {% endif %}
+            {% else %}
+                <a href="{% url 'login' %}" style="color:blueviolet;font-size:30px;">Please login to write a vote</a>
+            {% endif %}
+
+            <div class="commentList">
+                   {% for comment in project.review_set.all %}
+                      {% if comment.body %}
+                          <div class="comment">
+                              <a href="{% url 'user_profile' comment.owner.username %}">
+                                  <img class="avatar avatar--md" src="{{comment.owner.profile_image.url}}" alt="user" />
+                              </a>
+                              <div class="comment__details">
+                                  <a href="{% url 'user_profile' comment.owner.username %}" class="comment__author">{{comment.owner}}</a>
+                                  <p class="comment__info">{{comment.body|linebreaksbr|slice:"700"}}</p>
+                              </div>
+                              {% if comment.owner == profile %}
+                                  <a href="#" style="color:blueviolet;">Edit</a>
+                                  <a href="#" style="color:blueviolet;margin-left:10px;">Delete</a>
+                              {% endif %}
+                          </div>
+                      {% endif %}
+                   {% endfor %}
+            </div>
+
           </div>
         </div>
       </div>
