@@ -6,6 +6,8 @@ from django.contrib.auth import login,authenticate,logout
 
 from django.contrib.auth.models import User
 
+from . models import Profile
+
 from django.contrib import messages
 
 from .forms import CustomUserCreationForm
@@ -70,3 +72,8 @@ def logoutUser(request):
     logout(request)
     messages.info(request,'User is successfully logged out')
     return redirect('login')
+
+def profiles(request):
+    profiles=Profile.objects.all()
+    
+    return render(request,'profiles.html',{'profiles':profiles})

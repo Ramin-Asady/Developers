@@ -1,0 +1,59 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+
+  <!-- Main Section -->
+  <main class="home">
+    <section class="hero-section text-center">
+      <div class="container container--narrow">
+        <div class="hero-section__box">
+          <h2>CONNECT WITH <span>DEVELOPERS</span></h2>
+          <h2>FROM AROUND THE WORLD</h2>
+        </div>
+
+        <div class="hero-section__search">
+          <form id="searchForm" class="form" action="" method="get">
+            <div class="form__field">
+              <label for="formInput#search">Search Developers </label>
+              <input class="input input--text" id="formInput#search" type="text" placeholder="Search by developer name" />
+            </div>
+
+            <input class="btn btn--sub btn--lg" type="submit" value="Search" />
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- Search Result: DevList -->
+    <section class="devlist">
+      <div class="container">
+        <div class="grid grid--three">
+
+          
+          {% for item in profiles %}
+          
+          <div class="column card">
+            <div class="dev">
+              <a href="#" class="card__body">
+                <div class="dev__profile">
+                  <img class="avatar avatar--md" src="{{ item.profile_image.url }}" alt="image" />
+                  <div class="dev__meta">
+                    <h3>{{item.name}}</h3>
+                    <h5>{{item.short_intro|slice:"60"}}</h5>
+                  </div>
+                </div>
+                <p class="dev__info">
+                  {{item.bio|slice:"150"}}
+                </p>
+
+                 </a>
+            </div>
+          </div>
+          {% endfor %}   
+          
+        </div>
+      </div>
+    </section>
+
+{% endblock content %}
