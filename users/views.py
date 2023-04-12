@@ -7,6 +7,7 @@ from django.contrib.auth import login,authenticate,logout
 from django.contrib.auth.models import User
 
 from . models import Profile
+from projects.models import Project
 
 from django.contrib import messages
 
@@ -77,3 +78,16 @@ def profiles(request):
     profiles=Profile.objects.all()
     
     return render(request,'profiles.html',{'profiles':profiles})
+
+def user_profile(request,wk):
+
+    data_profile=Profile.objects.get(username=wk)
+
+    top_skill=data_profile.skill_set.exclude(description__exact="")
+    other_skill=data_profile.skill_set.filter(description="")
+
+    projects_data=Project.objects.filter(owner=data_profile)
+
+    content={'data_profile':data_profile , 'projects_data':projects_data,'top_skill':top_skill,'other_skill':other_skill}
+
+    return render(request,'user_profile.html',content)
