@@ -11,6 +11,8 @@ from projects.models import Project
 
 from django.contrib import messages
 
+from django.contrib.auth.decorators import login_required
+
 from .forms import CustomUserCreationForm
 
 def loginPage(request):
@@ -91,3 +93,13 @@ def user_profile(request,wk):
     content={'data_profile':data_profile , 'projects_data':projects_data,'top_skill':top_skill,'other_skill':other_skill}
 
     return render(request,'user_profile.html',content)
+
+
+@login_required(login_url='login')
+def userAccount(request):
+    profile=request.user.profile
+    projects=profile.project_set.all()
+    skills=profile.skill_set.all()
+
+    context={'profile':profile,'projects':projects,'skills':skills}
+    return render(request,'account.html',context)

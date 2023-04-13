@@ -1,5 +1,7 @@
 {% extends 'main.html' %}
 
+{% load static %}
+
 {% block content %}
 
 <main class="profile my-md">
@@ -18,31 +20,31 @@
 
                 {% if data_profile.social_github %}
                 <li>
-                  <a title="Github" href="{{data_profile.social_github}}" target="_blank"><i class="im im-github">Github</i></a>
+                  <a title="Github" href="{{data_profile.social_github}}" target="_blank"><img src="{% static 'images/thumbnail/github-50.png' %}"></a>
                 </li>
                 {% endif %}
                 
                 {% if data_profile.social_youtube %}
                 <li>
-                  <a title="Youtube" href="{{data_profile.social_youtube }}" target="_blank"><i class="im im-youtube"></i></a>
+                  <a title="Youtube" href="{{data_profile.social_youtube }}" target="_blank"><img src="{% static 'images/thumbnail/youtube-32.png' %}"></a>
                 </li>
                 {% endif %}
 
                 {% if data_profile.social_twitter %}
                 <li>
-                  <a title="Twitter" href="{{data_profile.social_twitter}}" target="_blank"><i class="im im-twitter"></i></a>
+                  <a title="Twitter" href="{{data_profile.social_twitter}}" target="_blank"><img src="{% static 'images/thumbnail/twitter-32.png' %}"></a>
                 </li>
                 {% endif %}
 
                 {% if data_profile.linkedin %}
                 <li>
-                  <a title="LinkedIn" href="{{data_profile.linkedin}}" target="_blank"><i class="im im-linkedin"></i></a>
+                  <a title="LinkedIn" href="{{data_profile.linkedin}}" target="_blank"><img src="{% static 'images/thumbnail/linkedin-32.png' %}"></a>
                 </li>
                 {% endif %}
 
                 {% if data_profile.social_website %}
                 <li>
-                  <a title="Personal Website" href="{{data_profile.social_website}}" target="_blank"><i class="im im-globe"></i>Personal_website</a>
+                  <a title="Personal Website" href="{{data_profile.social_website}}" target="_blank"><img src="{% static 'images/thumbnail/website-32.png' %}"></a>
                 </li>
                 {% endif %}
 
