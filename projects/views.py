@@ -1,11 +1,12 @@
 from django.shortcuts import render , redirect
 from .models import Project
 
-from .forms import ReviewForm
+from .forms import ReviewForm,ProjectForm
 
 from django.contrib import messages
 
-# Create your views here.
+from django.contrib.auth.decorators import login_required
+
 
 def projects(request):
     projects=Project.objects.all()
@@ -43,3 +44,47 @@ def single_project(request,pk):
 
     context={'project':project,'tags':tags,'form':form,'profile':profile,'Number_of_reviewers':Number_of_reviewers}
     return render(request,'single_project.html',context)
+
+
+@login_required(login_url="login")
+def createProject(request):
+    profile=request.user.profile
+    form=ProjectForm()
+
+    if request.method== 'POST' :
+        form=ProjectForm(request.POST,request.FILES)
+        if form .is_valid():
+            project=form.save(commit=False)
+            project.owner=profile
+            project.save()
+            messages.info(request,'Your project is successfully added!')
+            return redirect("account")
+
+    context={'form':form}
+    return render(request,'project_form.html',context)
+
+@login_required(login_url="login")
+def updateProject(request,pk):
+    profile=request.user.profile
+    project=profile.project_set.get(id=pk)
+    form=ProjectForm(instance=project)
+
+    if request.method== 'POST' :
+        form=ProjectForm(request.POST,request.FILES,instance=project)
+        if form .is_valid():
+            form.save()
+            messages.success(request,'The selected project is successfully updated!')
+            return redirect("account")
+
+    return render(request,'project_form.html',{'form':form})
+
+
+@login_required(login_url="login")
+def deleteProject(request,pk):
+
+    profile=request.user.profile
+    project=profile.project_set.get(title=pk)
+    project.delete()
+    messages.info(request,'Project is successfully deleted!')
+
+    return redirect('account')

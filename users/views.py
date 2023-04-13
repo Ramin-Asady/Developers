@@ -71,11 +71,6 @@ def registerUser(request):
 
     return render(request,'login_register.html',context)
 
-def logoutUser(request):
-    logout(request)
-    messages.info(request,'User is successfully logged out')
-    return redirect('login')
-
 def profiles(request):
     profiles=Profile.objects.all()
     

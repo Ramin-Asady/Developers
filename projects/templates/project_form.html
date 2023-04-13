@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+
+{% load static %}
+{% block content %}
+
+<main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+            <a class="backButton" href="{% url 'account' %}"><img src="{% static 'images/thumbnail/BackButton.png/'%}"></a>
+            <br>
+
+            <form class="form" method="POST" enctype="multipart/form-data">
+                {%  csrf_token %}
+                <!-- Input:Text -->
+                {% for field in form %}
+                <div class="form__field">
+                    
+                    <label for="formInput#text">{{field.label}} </label>
+                    {{field}}
+                    
+                </div>
+
+                {% endfor %}
+
+                <p style="display:inline; color:rgb(33, 184, 16)">Existing tags:</p>
+                {% for tag in oldTags %}
+                <button style="border-radius: 4px; padding:2px; border:2px dotted blue;margin-right:5px;color: blueviolet;">{{tag}}</button>
+                {% endfor %}
+                <div class="form__field">
+                    
+                    <label for="formInput#text">Add tags </label>
+                    <textarea name="tagAdding" class="input" placeholder="Add tags here and seperat each them with a single space"></textarea>
+                    
+                </div>
+                
+
+                <input style="display: block;" class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+    
+</main>
+
+{% endblock %}

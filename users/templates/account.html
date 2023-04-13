@@ -87,7 +87,7 @@
 
           <div class="settings">
             <h3 class="settings__title">Projects</h3>
-            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="#"><b style="font-size: 30px;">+</b> Add Project</a>
+            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'create-project'%}"><b style="font-size: 30px;">+</b> Add Project</a>
           </div>
 
           <table class="settings__table">
@@ -105,7 +105,7 @@
 
               </td>
               <td class="settings__tableActions">
-                <a class="tag tag--pill tag--main settings__btn" href="">
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'update_project' project.id %}">
                   <img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/20/null/external-edit-interface-kiranshastry-lineal-kiranshastry.png"/> 
                   Edit
                 </a>
