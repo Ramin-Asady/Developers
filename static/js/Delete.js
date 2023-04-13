@@ -1,10 +1,22 @@
-function deleteObject(pk){
-    var link = "http://127.0.0.1:8000/projects/delete-project/";
+function deleteObject(pk , num){
+   console.log(num)
+
+   if(num==1){
+    link='http://127.0.0.1:8000/delete_skill/'
+   }
+   else if(num=2){
+    link='http://127.0.0.1:8000/projects/delete-project/'
+   }
+   else{
+    link=null
+   }
+    
+    
     link += pk;
    
     console.log(link)
     Swal.fire({
-    title: `Are you sure to delete ${pk}?`,
+    title: 'Are you sure to delete this item',
     text: "You won't be able to revert this!",
     icon: 'warning',
     showCancelButton: true,

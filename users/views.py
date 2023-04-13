@@ -13,7 +13,7 @@ from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm , SkillForm
 
 def loginPage(request):
     page='login'
@@ -98,3 +98,49 @@ def userAccount(request):
 
     context={'profile':profile,'projects':projects,'skills':skills}
     return render(request,'account.html',context)
+
+
+@login_required(login_url='login')
+def createSkill(request):
+    profile=request.user.profile
+    form=SkillForm()
+    context={'form':form}
+
+    if request.method == "POST":
+        form=SkillForm(request.POST)
+
+        if form.is_valid():
+            skill=form.save(commit=False)
+            skill.owner=profile
+            skill.save()
+            messages.success(request,'Your new skill has successfully added! ')
+            return redirect('account')
+
+    return render(request,'skill_form.html',context)
+
+
+@login_required(login_url='login')
+def editSkill(request,pk):
+    profile=request.user.profile
+    skill=profile.skill_set.get(id=pk)
+    form=SkillForm(instance=skill)
+    context={'form':form}
+
+    if request.method=="POST":
+        form=SkillForm(request.POST,instance=skill)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'The selected skill has successfully been updated! ')
+            return redirect('account')
+
+    return render(request,'skill_form.html',context)
+
+
+@login_required(login_url='login')
+def deleteSkill(request,pk):
+    profile=request.user.profile
+    skill=profile.skill_set.get(id=pk)
+    skill.delete()
+
+    messages.success(request,'The selected skill has successfully been deleted! ')
+    return redirect('account')
