@@ -11,7 +11,7 @@
         <div class="column column--1of3">
           <div class="card text-center">
             <div class="card__body dev">
-              <a class="tag tag--pill tag--main settings__btn" href="#">Edit account</a>
+              <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit_account' %}">Edit account</a>
               <img class="avatar avatar--xl dev__avatar" src="{{profile.profile_image.url}}" />
               <h2 class="dev__name">{{profile.name}}</h2>
 
@@ -48,6 +48,12 @@
                 </li>
                 {% endif %}
               </ul>
+             
+                <a title="delete_account" href="{% url 'deleteAccount' profile.id %}" target="_self">
+                  <img src="{% static 'images/thumbnail/iconmonstr-trash-can-filled-24.png' %}" style="max-width:16px;">
+                  Delete_Account
+                </a>
+              
               
             </div>
           </div>
@@ -71,11 +77,10 @@
               </td>
               <td class="settings__tableActions">
                 <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit_skill' skill.id %}">
-                  <img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/20/null/external-edit-interface-kiranshastry-lineal-kiranshastry.png"/>
-                  Edit
+                  <img src="{% static 'images/thumbnail/iconmonstr-pencil-square-lined-16.png' %}"/> Edit
                 </a>
-                <a class="tag tag--pill tag--main settings__btn delete-stuff" onclick=" deleteObject('{{skill.id}}' , '1')">
-                  <img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/16/null/external-delete-multimedia-kiranshastry-solid-kiranshastry.png"/>
+                <a class="tag tag--pill tag--main settings__btn" onclick=" deleteObject('{{skill.id}}' , '1')">
+                  <img src="{% static 'images/thumbnail/iconmonstr-trash-can-filled-16.png' %}">
                   Delete
                 </a>
               </td>
@@ -106,12 +111,10 @@
               </td>
               <td class="settings__tableActions">
                 <a class="tag tag--pill tag--main settings__btn" href="{% url 'update_project' project.id %}">
-                  <img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/20/null/external-edit-interface-kiranshastry-lineal-kiranshastry.png"/> 
-                  Edit
+                  <img src="{% static 'images/thumbnail/iconmonstr-pencil-square-lined-16.png' %}"/> Edit
                 </a>
-                <a class="tag tag--pill tag--main settings__btn delete-stuff" onclick=" deleteObject('{{project.title}}' , '2')">
-                  <img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/16/null/external-delete-multimedia-kiranshastry-solid-kiranshastry.png"/>
-                  Delete
+                <a class="tag tag--pill tag--main settings__btn" onclick=" deleteObject('{{project.title}}' , '2')">
+                  <img src="{% static 'images/thumbnail/iconmonstr-trash-can-filled-16.png' %}">Delete
                 </a>
               </td>
             </tr>

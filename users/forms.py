@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 from django.forms import ModelForm
 
-from .models import Skill
+from .models import Skill,Profile
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
@@ -31,3 +31,18 @@ class SkillForm(ModelForm):
 
         for name,field in self.fields.items():
                 field.widget.attrs.update({'class':'input','placeholder':"Enter text"}) 
+
+class ProfileForm(ModelForm):
+    class Meta:
+        model=Profile
+        fields=['username','name','email','short_intro','bio','location',
+               'profile_image','social_github','social_twitter',
+                'social_linkedin','social_youtube','social_website']
+
+        labels={'profile_image':'Avatar:'}
+
+    def __init__(self,*args,**kwargs):
+        super(ProfileForm,self).__init__(*args,**kwargs)
+
+        for name,field in self.fields.items():
+                field.widget.attrs.update({'class':'input' , 'style':"font-size:20px;color:green;"})

@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect
 
+from django.http import HttpResponse
+
 from django.contrib.auth import login,authenticate,logout
 
 # Create your views here.
@@ -13,7 +15,7 @@ from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 
-from .forms import CustomUserCreationForm , SkillForm
+from .forms import CustomUserCreationForm , SkillForm , ProfileForm
 
 def loginPage(request):
     page='login'
@@ -144,3 +146,37 @@ def deleteSkill(request,pk):
 
     messages.success(request,'The selected skill has successfully been deleted! ')
     return redirect('account')
+
+@login_required(login_url='login')
+def editAccount(request):
+    profile=request.user.profile
+    form=ProfileForm(instance=profile)
+
+    if request.method == "POST":
+        form=ProfileForm(request.POST, request.FILES ,instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'You are successfully edited your profile!')
+            return redirect('account')
+
+    context={'form':form}
+    return render(request,'edit_account.html',context)
+
+
+@login_required(login_url='login')
+def deleteAccount(request,wk):
+       
+       profile1=request.user.profile
+       profile2=Profile.objects.get(id=wk)
+       if profile1==profile2 :
+            user=profile1.user
+            if request.method == "POST":
+          
+                user.delete()
+                messages.info(request,"Now you are not a subscriber!")
+                return redirect('projects')
+
+            return render(request,'delete_account.html')
+
+       else:
+            return HttpResponse("An error occurred")
