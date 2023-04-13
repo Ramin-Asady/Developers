@@ -109,7 +109,7 @@
                   <img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/20/null/external-edit-interface-kiranshastry-lineal-kiranshastry.png"/> 
                   Edit
                 </a>
-                <a class="tag tag--pill tag--main settings__btn">
+                <a class="tag tag--pill tag--main settings__btn" onclick=" deleteObject('{{project.title}}')">
                   <img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/16/null/external-delete-multimedia-kiranshastry-solid-kiranshastry.png"/>
                   Delete
                 </a>
@@ -122,5 +122,7 @@
       </div>
     </div>
   </main>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="{% static 'js/Delete.js' %}"></script>
 
   {% endblock %}
