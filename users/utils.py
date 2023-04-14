@@ -24,7 +24,6 @@ def profilePagination(request,profiles,result):
 
     page=request.GET.get('page')
     paginator=Paginator(profiles,result)
-    page_range=range(1, (paginator.num_pages+1))
 
     try:
         profiles=paginator.page(page)
@@ -37,4 +36,23 @@ def profilePagination(request,profiles,result):
         page=paginator.num_pages
         profiles=paginator.page(page)
 
-    return profiles , page_range
+    leftIndex= int(page) - 4
+    if leftIndex < 1:
+        leftIndex=1
+
+    rightIndex= int(page) + 6
+    if rightIndex > paginator.num_pages:
+        rightIndex=paginator.num_pages + 1
+
+    custom_range=range(leftIndex,rightIndex)
+
+    showFirstPage=False
+    showLastPage=False
+
+    if paginator.num_pages > rightIndex - 1 :
+        showLastPage=True
+
+    if leftIndex>1:
+        showFirstPage=True
+
+    return profiles , custom_range , showFirstPage , showLastPage
