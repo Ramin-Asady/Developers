@@ -55,4 +55,4 @@ def profilePagination(request,profiles,result):
     if leftIndex>1:
         showFirstPage=True
 
-    return profiles , custom_range , showFirstPage , showLastPage
+    return profiles , custom_range , showFirstPage , showLastPage , paginator

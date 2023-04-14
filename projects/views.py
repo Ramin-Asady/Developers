@@ -18,10 +18,10 @@ def projects(request):
 
     result=1
     
-    projects , custom_range , showFirstPage , showLastPage= projectPagination(request,projects,result)
+    projects , custom_range , showFirstPage , showLastPage , paginator= projectPagination(request,projects,result)
 
-    content={"projects":projects,'search_query':search_query , 'page_range':custom_range , 
-                'showFirstPage':showFirstPage , 'showLastPage':showLastPage}
+    content={"projects":projects,'search_text':search_query , 'page_range':custom_range , 
+                'showFirstPage':showFirstPage , 'showLastPage':showLastPage , 'paginator':paginator}
 
     return render(request,'projects.html' , content)
 
