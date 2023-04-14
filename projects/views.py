@@ -7,7 +7,7 @@ from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 
-from .utils import projectSearch
+from .utils import projectSearch, projectPagination
 
 
 def projects(request):
@@ -16,7 +16,11 @@ def projects(request):
     if  not projects:  
          messages.error(request,'There is no project related your search!!!')
 
-    content={"projects":projects,'search_text':search_query}
+    result=1
+    
+    projects , page_range= projectPagination(request,projects,result)
+
+    content={"projects":projects,'search_text':search_query , 'page_range':page_range}
 
     return render(request,'projects.html' , content)
 
