@@ -17,7 +17,7 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import CustomUserCreationForm , SkillForm , ProfileForm
 
-from .utils import profileSearch
+from .utils import profileSearch , profilePagination
 
 def loginPage(request):
     page='login'
@@ -82,9 +82,10 @@ def profiles(request):
     if  not profiles:  
          messages.error(request,'There is no profile related your search!!!')
 
+    result=1
+    profiles , page_range= profilePagination(request,profiles,result)
 
-    user_data={'profiles':profiles , 'search_query':search_query}
-
+    user_data={'profiles':profiles , 'search_query':search_query , 'page_range':page_range}
     
     return render(request,'profiles.html',user_data)
 
