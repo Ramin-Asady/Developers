@@ -7,21 +7,18 @@ from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 
-from django.db.models import Q
+from .utils import projectSearch
 
 
 def projects(request):
-    search_query=''
+    projects , search_query = projectSearch(request)
 
-    if request.GET.get('search_query'):
-        search_query=request.GET.get('search_query')
+    if  not projects:  
+         messages.error(request,'There is no project related your search!!!')
 
-    tags=Tag.objects.filter(name__icontains=search_query)
+    content={"projects":projects,'search_text':search_query}
 
-    projects=Project.objects.distinct().filter(Q(title__icontains=search_query) | Q(vote_total__icontains=search_query) |
-                            Q(tags__in=tags) | Q(owner__username__icontains=search_query))
-
-    return render(request,'projects.html' , {"projects":projects})
+    return render(request,'projects.html' , content)
 
 def single_project(request,pk):
     project=Project.objects.get(title=pk)
