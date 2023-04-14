@@ -83,9 +83,10 @@ def profiles(request):
          messages.error(request,'There is no profile related your search!!!')
 
     result=1
-    profiles , page_range= profilePagination(request,profiles,result)
+    profiles , custom_range , showFirstPage , showLastPage= profilePagination(request,profiles,result)
 
-    user_data={'profiles':profiles , 'search_query':search_query , 'page_range':page_range}
+    user_data={'profiles':profiles , 'search_query':search_query , 'page_range':custom_range , 
+                'showFirstPage':showFirstPage , 'showLastPage':showLastPage }
     
     return render(request,'profiles.html',user_data)
 
