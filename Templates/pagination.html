@@ -7,7 +7,7 @@
         {% endif %}
 
         {% if query_set.has_previous %}
-        <li><a href="?page={{query_set.previous_page_number}}" class="btn page-link col2" >&#10094; Prev</a></li>
+        <li><a href="?page={{query_set.previous_page_number}}" class="btn page-link col2" data-page="{{query_set.previous_page_number}}" >&#10094; Prev</a></li>
         {% endif %}
          
         {% for page in page_range %} 
@@ -19,7 +19,7 @@
         {% endfor %}
 
         {% if query_set.has_next %}
-        <li><a href="?page={{query_set.next_page_number}}" class="btn page-link col2">Next &#10095;</a></li>
+        <li><a href="?page={{query_set.next_page_number}}" class="btn page-link col2" data-page="{{query_set.next_page_number}}">Next &#10095;</a></li>
         {% endif %}
 
         {% if showLastPage == True %}

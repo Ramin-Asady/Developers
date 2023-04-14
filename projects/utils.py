@@ -54,4 +54,4 @@ def projectPagination(request,projects,result):
     if leftIndex>1:
         showFirstPage=True
 
-    return projects , custom_range , showFirstPage , showLastPage
+    return projects , custom_range , showFirstPage , showLastPage , paginator
