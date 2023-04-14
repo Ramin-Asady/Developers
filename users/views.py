@@ -8,7 +8,7 @@ from django.contrib.auth import login,authenticate,logout
 
 from django.contrib.auth.models import User
 
-from . models import Profile
+from . models import Profile, Skill
 from projects.models import Project
 
 from django.contrib import messages
@@ -16,6 +16,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from .forms import CustomUserCreationForm , SkillForm , ProfileForm
+
+from django.db.models import Q
 
 def loginPage(request):
     page='login'
@@ -74,7 +76,17 @@ def registerUser(request):
     return render(request,'login_register.html',context)
 
 def profiles(request):
-    profiles=Profile.objects.all()
+    profile=Profile.objects.exclude(Q(bio = "") | Q(short_intro = None))
+    search_query=''
+
+    if request.GET.get('search_query'):
+        search_query=request.GET.get('search_query')
+
+    skills=Skill.objects.filter(name__iexact=search_query)
+
+    profiles=profile.distinct().filter(Q(name__icontains=search_query) | Q(bio__icontains=search_query) | 
+                                  Q(short_intro__icontains=search_query) | Q(skill__in=skills) )
+
     
     return render(request,'profiles.html',{'profiles':profiles})
 
