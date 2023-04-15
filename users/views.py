@@ -15,7 +15,7 @@ from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 
-from .forms import CustomUserCreationForm , SkillForm , ProfileForm
+from .forms import CustomUserCreationForm , SkillForm , ProfileForm , MessageForm
 
 from .utils import profileSearch , profilePagination
 
@@ -192,3 +192,42 @@ def deleteAccount(request,wk):
 
        else:
             return HttpResponse("An error occurred")
+
+def sendingMessage(request,wk):
+    recipient=Profile.objects.get(username=wk)
+    form=MessageForm()
+
+    try:
+       sender=request.user.profile
+
+    except:
+        sender=None
+
+    if request.method=="POST":
+        form=MessageForm(request.POST)
+        if form.is_valid():
+           message=form.save(commit=False)
+           message.recipient=recipient
+           message.sender=sender
+           if sender:
+              message.name=sender.name
+              message.email=sender.email
+           
+           message.save()
+           messages.success(request,'Your message has successfully sent!!! ')
+
+        return redirect('user_profile' , wk= recipient.username)
+
+    content={'form':form ,'recipient':recipient}
+
+    return render(request,'message_form.html',content)
+
+@login_required(login_url='login')
+def inbox(request):
+    profile=request.user.profile
+    Messages=profile.messages.all()
+    unread_messages=Messages.filter(is_read=False).count()
+
+    context={'Messages':Messages,'unread_messages':unread_messages}
+
+    return render(request, 'inbox.html',context)

@@ -19,5 +19,7 @@ urlpatterns = [
     path('edit_account/', views.editAccount , name="edit_account"),
     path('delete_Account/<str:wk>', views.deleteAccount , name="deleteAccount"),
 
+    path('inbox', views.inbox , name="inbox"), 
+    path('user_profile/<str:wk>/sendingMessage', views.sendingMessage , name="sendingMessage"),
 
               ]
