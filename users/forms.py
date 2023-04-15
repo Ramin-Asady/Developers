@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 from django.forms import ModelForm
 
-from .models import Skill,Profile
+from .models import Skill,Profile, Message
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
@@ -46,3 +46,21 @@ class ProfileForm(ModelForm):
 
         for name,field in self.fields.items():
                 field.widget.attrs.update({'class':'input' , 'style':"font-size:20px;color:green;"})
+
+
+class MessageForm(ModelForm):
+    class Meta:
+        model=Message
+        fields=['name' , 'email' , 'subject' , 'body']
+
+        labels={'name':'* Name:' , 'email': '* Email:' , 'subject':' Subject:' ,'body':'* Your Message:'}
+
+
+    def __init__(self,*args,**kwargs):
+        super(MessageForm,self).__init__(*args,**kwargs)
+
+        for name,field in self.fields.items():
+                if name=='email':
+                   field.widget.attrs.update({'class':'input','placeholder':"example@email.com"})
+                else:
+                   field.widget.attrs.update({'class':'input','placeholder':"Enter text"}) 
