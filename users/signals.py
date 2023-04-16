@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 
 from .models import Profile
 
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 def createUpdated(sender,instance,created,**kwargs):
     if created :
@@ -16,6 +19,19 @@ def createUpdated(sender,instance,created,**kwargs):
             name=user.first_name,
             email=user.email,
         )
+
+        subject= 'Welcome to Developers  ' + str(user.first_name)
+        mess1= 'Dear ' + str(user.first_name) +' Welcome to Developers\n' + 'Here is your login information\n'
+        mess2= 'Username: ' + str(user.username) +'\n' +'You can modify your profile here:\n'+'http://127.0.0.1:8000/edit_account'
+        message= mess1 + mess2 
+
+        send_mail(
+                subject,
+                message,
+                settings.EMAIL_HOST_USER,
+                [profile.email],
+                fail_silently=False,
+            )
 
 
 def profileUpdate(sender,instance,created,**kwargs):
