@@ -866,6 +866,10 @@ img {
   background-color: rgb(255,255,255);
 } 
 
+.col4{
+  color:blue;
+}
+
 .col5{
   color:blueviolet;
 }
@@ -875,6 +879,14 @@ img {
   margin-left:10px;
   cursor: pointer;
 }
+.col6{
+  color:rgb(255, 0, 89);
+}
 
+
+.msg-btn{
+  float:right;cursor: pointer; background-color: rgb(176, 253, 253);font-size: 16px;border-color: blueviolet;
+          color: black;padding:4px;border-radius: 5px;
+}
 
 

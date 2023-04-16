@@ -21,5 +21,7 @@ urlpatterns = [
 
     path('inbox', views.inbox , name="inbox"), 
     path('user_profile/<str:wk>/sendingMessage', views.sendingMessage , name="sendingMessage"),
+    path('inbox/<str:pk>', views.message , name="message"),
+    path('inbox/message/delete/<str:pk>', views.messageDelete , name="messageDelete"),
 
               ]

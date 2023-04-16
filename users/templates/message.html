@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+  <!-- Main Section -->
+  <main class="messagePage my-xl">
+    <div class="content-box">
+      <div class="message">
+        <a class="backButton" href="{% url 'inbox' %}"><img src="{% static 'images/thumbnail/BackButton.png/' %}"></a>
+        <h2 class="message__subject">{{Message.subject}}</h4>
+          <button class="msg-btn" onclick=" deleteObject('{{Message.id}}' , '4')">Delete the message</button>
+
+          {% if Message.sender %}
+          <a href="{% url 'user_profile' Message.sender.username %}" class="message__author"><b class="col4">Sender: </b> {{Message.sender.name}}</a>
+          {% else %}
+          <p class="message__author"><b class="col6">Sender: </b> {{Message.name}}</p>
+          {% endif %}
+          <p class="message__date">{{Message.created}}</p>
+          <div class="message__body">{{Message.body|linebreaksbr}} 
+            {% if Message.date_of_read and Showing_first_read %}
+            <br><br><b class="col4">You  read this  message  for  first  time  at  {{Message.date_of_read}}</b>
+            {% endif %}
+            
+          </div>
+      </div>
+    </div>
+  </main>
+
+{% endblock content %}
