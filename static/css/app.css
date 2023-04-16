@@ -866,5 +866,15 @@ img {
   background-color: rgb(255,255,255);
 } 
 
+.col5{
+  color:blueviolet;
+}
+
+.delete{
+  color:blueviolet;
+  margin-left:10px;
+  cursor: pointer;
+}
+
 
 
