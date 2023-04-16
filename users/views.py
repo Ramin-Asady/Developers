@@ -19,6 +19,8 @@ from .forms import CustomUserCreationForm , SkillForm , ProfileForm , MessageFor
 
 from .utils import profileSearch , profilePagination
 
+import datetime as dt
+
 def loginPage(request):
     page='login'
 
@@ -231,3 +233,33 @@ def inbox(request):
     context={'Messages':Messages,'unread_messages':unread_messages}
 
     return render(request, 'inbox.html',context)
+
+
+@login_required(login_url='login')
+def message(request,pk):
+    profile=request.user.profile
+    Message=profile.messages.get(id=pk)
+
+    Showing_first_read=True
+
+    if Message.is_read == False:
+        Message.is_read = True
+        Showing_first_read=False
+        Message.date_of_read=dt.datetime.now()
+        Message.save()
+
+    else:
+        Showing_first_read=True
+
+    content={'Message':Message , 'Showing_first_read':Showing_first_read }
+
+    return render(request,'message.html',content)
+
+@login_required(login_url='login')
+def messageDelete(request,pk):
+    profile=request.user.profile
+    Message=profile.messages.get(id=pk)
+    Message.delete()
+    messages.info(request,"The message is deleted")
+
+    return redirect('inbox')

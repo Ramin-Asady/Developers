@@ -25,7 +25,7 @@
         <li class="message">
         {% endif %}
 
-          <a href="#">
+          <a href="{% url 'message' message.id %}">
 
             {% if message.name %}
             <span class="message__author">{{message.name }}</span>

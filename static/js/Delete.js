@@ -11,6 +11,10 @@ function deleteObject(pk , num){
     link='http://127.0.0.1:8000/projects/review/delete/'
 
    }
+   else if(num==4){
+    link='http://127.0.0.1:8000/inbox/message/delete/'
+
+   }
    else{
     link=null
    }
