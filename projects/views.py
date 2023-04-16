@@ -34,8 +34,6 @@ def single_project(request,pk):
     else:
         profile=None
 
-    print(profile)
-
     form=ReviewForm()
 
     
@@ -51,8 +49,6 @@ def single_project(request,pk):
             project.getVoteCount
             messages.success(request,'Your review is successfully saved!')
             return redirect('single_project',pk=project.title)
-
-
 
     context={'project':project,'tags':tags,'form':form,'profile':profile,'Number_of_reviewers':Number_of_reviewers}
     return render(request,'single_project.html',context)
@@ -100,3 +96,37 @@ def deleteProject(request,pk):
     messages.info(request,'Project is successfully deleted!')
 
     return redirect('account')
+
+@login_required(login_url="login")
+def reviewUpdate(request,pk):
+    
+    profile=request.user.profile
+    project=Project.objects.get(title=pk)
+    review=profile.review_set.get(project=project)
+
+    form=ReviewForm(instance=review)
+    context={'form':form}
+
+    if request.method=="POST":
+        form=ReviewForm(request.POST,instance=review)
+        form.save()
+        project.getVoteCount
+        messages.success(request,'Your comment for this project is successfully updated!')
+        return redirect ('single_project' , pk=review.project.title )
+
+
+    return render(request,'review_form.html',context)
+
+
+@login_required(login_url="login")
+def deleteReview(request,pk):
+
+    profile=request.user.profile
+    project=Project.objects.get(title=pk)
+    review=profile.review_set.get(project=project)
+
+    review.delete()
+
+    messages.info(request,'Your Review on this project is successfully deleted!')
+
+    return redirect ('single_project' , pk=project.title )

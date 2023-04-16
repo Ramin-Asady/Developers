@@ -55,6 +55,7 @@ class Review(models.Model):
     id=models.UUIDField(default=uuid.uuid4,unique=True,primary_key=True,editable=False)
 
     class Meta:
+        unique_together=[['owner','project']]
         ordering=['project','-value' , '-created']
 
     

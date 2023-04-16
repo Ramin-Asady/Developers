@@ -4,8 +4,12 @@ function deleteObject(pk , num){
    if(num==1){
     link='http://127.0.0.1:8000/delete_skill/'
    }
-   else if(num=2){
+   else if(num==2){
     link='http://127.0.0.1:8000/projects/delete-project/'
+   }
+   else if(num==3){
+    link='http://127.0.0.1:8000/projects/review/delete/'
+
    }
    else{
     link=null

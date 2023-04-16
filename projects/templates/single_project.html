@@ -72,8 +72,8 @@
                                   <p class="comment__info">{{comment.body|linebreaksbr|slice:"700"}}</p>
                               </div>
                               {% if comment.owner == profile %}
-                                  <a href="#" style="color:blueviolet;">Edit</a>
-                                  <a href="#" style="color:blueviolet;margin-left:10px;">Delete</a>
+                                  <a href="{% url 'reviewUpdate' project.title %}" class="col5">Edit</a>
+                                  <a class="delete" onclick="deleteObject('{{comment.project.title}}','3')">Delete</a>
                               {% endif %}
                           </div>
                       {% endif %}
