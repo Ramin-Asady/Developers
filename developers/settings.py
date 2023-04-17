@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'projects.apps.ProjectsConfig',
     'users.apps.UsersConfig',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -105,6 +106,14 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL='yourMail@hotmail.com'  # You don't have to set Default Email. In my case I couldn't send reset password email via Hotmail .therefore I had to configure it like this
+EMAIL_HOST='smtp.office365.com'   # The host address for hotmail provider
+EMAIL_PORT= 587
+EMAIL_USE_TLS= True
+EMAIL_HOST_USER= 'yourMail@hotmail.com'   # This is that email which site emails will be send from it to users. For me it's that email account I defined for Default Email.
+EMAIL_HOST_PASSWORD='*************' #It's better use app password instead of your real password.
 
 
 # Static files (CSS, JavaScript, Images)

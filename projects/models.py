@@ -9,7 +9,7 @@ class Project(models.Model):
     owner=models.ForeignKey(Profile, on_delete=models.CASCADE,blank=True,null=True)
     title=models.CharField(max_length=200)
     description=models.TextField(null=True,blank=True)
-    featured_image=models.ImageField(null=True,blank=True, default='default.jpg',upload_to="ProjectImages/")
+    featured_image=models.ImageField(null=True,blank=True, default='ProjectImages/default.jpg',upload_to="ProjectImages/")
     demo_link=models.CharField(max_length=2000,null=True,blank=True)
     source_link=models.CharField(max_length=2000,null=True,blank=True)
 
@@ -55,6 +55,7 @@ class Review(models.Model):
     id=models.UUIDField(default=uuid.uuid4,unique=True,primary_key=True,editable=False)
 
     class Meta:
+        unique_together=[['owner','project']]
         ordering=['project','-value' , '-created']
 
     
