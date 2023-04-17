@@ -57,7 +57,7 @@
                     <p>Your project has {{Number_of_reviewers}} reviewers</p>
                {% endif %}
             {% else %}
-                <a href="{% url 'login' %}" style="color:blueviolet;font-size:30px;">Please login to write a vote</a>
+                <a href="{% url 'login' %}?next={{request.path}}" class="rev-log">Please login to write a vote</a>
             {% endif %}
 
             <div class="commentList">

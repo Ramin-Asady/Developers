@@ -889,4 +889,26 @@ img {
           color: black;padding:4px;border-radius: 5px;
 }
 
+.p-reset1{
+  color: rgb(179, 120, 234); margin-left:5%;
+
+}
+
+.p-reset2{
+  color:  rgb(98, 31, 161); margin-left:5%;
+}
+
+.p-reset3{
+  color: blueviolet; margin-left:5%;
+}
+
+.p-reset4{
+  color: rgb(98, 31, 161); margin-left:5%;margin-top:10px;
+}
+
+.rev-log{
+  color:blueviolet;font-size:1.5em;
+}
+
+
 
