@@ -105,7 +105,7 @@ def reviewUpdate(request,pk):
     review=profile.review_set.get(project=project)
 
     form=ReviewForm(instance=review)
-    context={'form':form}
+    context={'form':form , 'project':project}
 
     if request.method=="POST":
         form=ReviewForm(request.POST,instance=review)
