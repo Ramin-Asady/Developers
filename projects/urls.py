@@ -11,4 +11,8 @@ urlpatterns = [
 
     path('review/update/<str:pk>', views.reviewUpdate, name="reviewUpdate"),
     path('review/delete/<str:pk>', views.deleteReview, name="deleteReview"),
+
+    path('update-project/<str:pk>/tag&deletion/<str:wk>/', views.tagDeletion, name="tagDeletion"),
+
+
 ]

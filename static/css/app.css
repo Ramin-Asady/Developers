@@ -912,3 +912,19 @@ img {
 
 
 
+.img-link{
+  max-width: 32px;
+}
+
+.tag-show{
+  display:inline; 
+  color:rgb(33, 184, 16);
+}
+
+.tag-form{
+  border-radius: 4px; padding:2px; border:2px dotted blue;margin-right:5px;color: blueviolet;display:inline;cursor: pointer;
+}
+
+.tag-form span{
+  position: relative; top:-5px;margin-left:10px;color: red; 
+}
