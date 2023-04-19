@@ -58,17 +58,22 @@ def single_project(request,pk):
 def createProject(request):
     profile=request.user.profile
     form=ProjectForm()
+    update=False
 
     if request.method== 'POST' :
         form=ProjectForm(request.POST,request.FILES)
+        newTags=request.POST["tagAdding"].replace(',' , " ").split()
         if form .is_valid():
             project=form.save(commit=False)
             project.owner=profile
             project.save()
+            for tag in newTags:
+                tag , created= Tag.objects.get_or_create(name=tag)
+                project.tags.add(tag)
             messages.info(request,'Your project is successfully added!')
             return redirect("account")
 
-    context={'form':form}
+    context={'form':form,"update":update}
     return render(request,'project_form.html',context)
 
 @login_required(login_url="login")
@@ -76,15 +81,22 @@ def updateProject(request,pk):
     profile=request.user.profile
     project=profile.project_set.get(id=pk)
     form=ProjectForm(instance=project)
+    update=True
 
     if request.method== 'POST' :
+        newTags=request.POST["tagAdding"].replace(',' , " ").split()
         form=ProjectForm(request.POST,request.FILES,instance=project)
         if form .is_valid():
-            form.save()
+            project=form.save()
+            for tag in newTags:
+                tag , created= Tag.objects.get_or_create(name=tag)
+                project.tags.add(tag)
             messages.success(request,'The selected project is successfully updated!')
             return redirect("account")
+        
+    content={'form':form , 'project':project, "update":update}
 
-    return render(request,'project_form.html',{'form':form})
+    return render(request,'project_form.html',content)
 
 
 @login_required(login_url="login")
@@ -130,3 +142,12 @@ def deleteReview(request,pk):
     messages.info(request,'Your Review on this project is successfully deleted!')
 
     return redirect ('single_project' , pk=project.title )
+
+@login_required(login_url="login")
+def tagDeletion(request,pk,wk):
+    profile=request.user.profile
+    project=profile.project_set.get(id=pk)
+    tag=project.tags.get(name=wk)
+    
+    tag.delete()
+
