@@ -5,6 +5,10 @@
 {% block content %}
 
 <main class="formPage my-xl">
+
+    <div class="pass-change btn--sub">
+        <a href="{% url 'password_change' %}">Change your password</a>
+    </div>
     <div class="content-box">
         <div class="formWrapper">
             <a class="backButton" href="{% url 'account' %}"><img src="{% static 'images/thumbnail/BackButton.png/' %}"></a>
@@ -16,9 +20,9 @@
                 {% for field in form %}
                 <div class="form__field">
                     {% if field.label == 'Avatar:'%}
-                    <label for="formInput#text" style="color:red;">{{field.label}}</label>
+                    <label for="formInput#text" id="col-red" >{{field.label}}</label>
                     {% else %}
-                    <label for="formInput#text" style="color:blue;">{{field.label}} </label>
+                    <label for="formInput#text" id="col-blue" >{{field.label}}</label>
                     {% endif %}
                     {{field}}
                 </div>

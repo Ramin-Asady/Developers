@@ -2,6 +2,8 @@ from django.urls import path
 
 from . import views
 
+from django.contrib.auth import views as viewPass
+
 urlpatterns = [
 
     path('login/', views.loginPage , name="login"),
@@ -23,5 +25,9 @@ urlpatterns = [
     path('user_profile/<str:wk>/sendingMessage', views.sendingMessage , name="sendingMessage"),
     path('inbox/<str:pk>', views.message , name="message"),
     path('inbox/message/delete/<str:pk>', views.messageDelete , name="messageDelete"),
+
+    path('edit_account/password_change' , viewPass.PasswordChangeView.as_view(template_name="password_change.html") , name='password_change'),
+    path('edit_account/password_change/done' , viewPass.PasswordChangeDoneView.as_view(template_name="password_change_successful.html") ,
+           name='password_change_done'),
 
               ]

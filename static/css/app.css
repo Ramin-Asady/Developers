@@ -885,29 +885,41 @@ img {
 
 
 .msg-btn{
-  float:right;cursor: pointer; background-color: rgb(176, 253, 253);font-size: 16px;border-color: blueviolet;
-          color: black;padding:4px;border-radius: 5px;
+  float:right;
+  cursor: pointer; 
+  background-color: rgb(176, 253, 253);
+  font-size: 16px;
+  border-color: blueviolet;
+  color: black;
+  padding:4px;
+  border-radius: 5px;
 }
 
 .p-reset1{
-  color: rgb(179, 120, 234); margin-left:5%;
+  color: rgb(179, 120, 234);
+  margin-left:5%;
 
 }
 
 .p-reset2{
-  color:  rgb(98, 31, 161); margin-left:5%;
+  color:  rgb(98, 31, 161);
+  margin-left:5%;
 }
 
 .p-reset3{
-  color: blueviolet; margin-left:5%;
+  color: blueviolet;
+  margin-left:5%;
 }
 
 .p-reset4{
-  color: rgb(98, 31, 161); margin-left:5%;margin-top:10px;
+  color: rgb(98, 31, 161);
+  margin-left:5%;
+  margin-top:10px;
 }
 
 .rev-log{
-  color:blueviolet;font-size:1.5em;
+  color:blueviolet;
+  font-size:1.5em;
 }
 
 
@@ -922,9 +934,52 @@ img {
 }
 
 .tag-form{
-  border-radius: 4px; padding:2px; border:2px dotted blue;margin-right:5px;color: blueviolet;display:inline;cursor: pointer;
+  border-radius: 4px;
+  padding:2px;
+  border:2px dotted blue;
+  margin-right:5px;
+  color: blueviolet;
+  display:inline;
+  cursor: pointer;
 }
 
 .tag-form span{
-  position: relative; top:-5px;margin-left:10px;color: red; 
+  position: relative;
+  top:-5px;
+  margin-left:10px;
+  color: red; 
+}
+
+.pass-change{
+  width: 200px;
+  margin:0 auto;
+  margin-bottom:20px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.pass-change a{
+  padding-top:1em;
+  padding-bottom:1em;
+  color:white;
+}
+
+#col-blue{
+  color:blue;
+}
+
+
+#col-red{
+  color:rgb(255, 0, 89);
+}
+
+#pass-back{
+  width:32px; 
+  margin-bottom:-40px;
+}
+
+#change-done{
+  color: blue;
+  margin-left:5%;
+  margin-top:10px;
 }
