@@ -107,6 +107,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+PASSWORD_RESET_TIMEOUT = 600
+
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL='yourMail@hotmail.com'  # You don't have to set Default Email. In my case I couldn't send reset password email via Hotmail .therefore I had to configure it like this
 EMAIL_HOST='smtp.office365.com'   # The host address for hotmail provider
