@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from .serializers import ProjectSerializer , ProfileSerializer
-from projects.models import Project
+from projects.models import Project, Review
 from users.models import Profile
 
 @api_view(['GET'])
@@ -52,4 +52,25 @@ def getUserProfile(request,pk):
        userProfile=Profile.objects.get(id=pk)
        serializer=ProfileSerializer(userProfile, many=False)
        return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def projectVote(request,pk):
+      project=Project.objects.get(id=pk)
+      user=request.user.profile
+      data=request.data
+      review , created =Review.objects.get_or_create(
+            owner=user,
+            project=project,
+
+      )
+      review.body=data['body']
+      review.value=data['value']
+      review.save()
+      project.getVoteCount
+    
+      content={
+            "Status" : "Your review submitted or in the case of having review on this Project it is modified"
+      }
+      return Response(content)
 

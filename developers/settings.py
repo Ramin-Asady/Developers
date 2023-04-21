@@ -32,9 +32,12 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'django_cleanup.apps.CleanupConfig',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
 
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -159,6 +162,15 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+'''CORS_ALLOWED_ORIGINS = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:8080",
+    "http://127.0.0.1:9000",
+]'''
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 PASSWORD_RESET_TIMEOUT = 600
 
