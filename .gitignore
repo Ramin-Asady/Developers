@@ -13,3 +13,8 @@ db.sqlite3
 #making sure that the line above works
 .pyc
 
+#making sure that the line above works
+*.pyc
+
+requirements.txt
+

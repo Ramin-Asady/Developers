@@ -40,7 +40,7 @@ def loginPage(request):
             login(request,user)
             cop='welcome  '+str(user.username)
             messages.success(request,cop)
-            return redirect('projects')
+            return redirect(request.GET['next'] if 'next' in request.GET else 'account')
 
         else:
             messages.error(request,'Username or password are incorrect')

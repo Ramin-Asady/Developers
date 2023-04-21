@@ -1,5 +1,7 @@
 {% extends 'main.html' %}
 
+{% load static %}
+
 {% block content %}
 
 <main class="singleProject my-md">
@@ -15,12 +17,12 @@
             {% endfor %}
           </div>
                 {% if project.source_link %}
-                  <a class="singleProject__liveLink" href="https://{{project.source_link}}" target="_blank"><i class="im im-external-link"></i> Source_code
+                  <a class="singleProject__liveLink" href="{{project.source_link}}" target="_blank"><img class="img-link" src="{% static 'images/thumbnail/Linking-16.png'%}"> Source_code
                   </a>
                 {% endif %}
 
                 {% if project.demo_link %}
-                  <a class="singleProject__liveLink" href="https://{{project.demo_link}}" target="_blank"><i class="im im-external-link"></i>Live_demo
+                  <a class="singleProject__liveLink" href="{{project.demo_link}}" target="_blank"><img class="img-link" src="{% static 'images/thumbnail/Linking-16.png'%}">Live_demo
                   </a>
                 {% endif %}
         </div>
@@ -57,7 +59,7 @@
                     <p>Your project has {{Number_of_reviewers}} reviewers</p>
                {% endif %}
             {% else %}
-                <a href="{% url 'login' %}" style="color:blueviolet;font-size:30px;">Please login to write a vote</a>
+                <a href="{% url 'login' %}?next={{request.path}}" class="rev-log">Please login to write a vote</a>
             {% endif %}
 
             <div class="commentList">

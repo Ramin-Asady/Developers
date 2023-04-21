@@ -22,14 +22,18 @@
 
                 {% endfor %}
 
-                <p style="display:inline; color:rgb(33, 184, 16)">Existing tags:</p>
-                {% for tag in oldTags %}
-                <button style="border-radius: 4px; padding:2px; border:2px dotted blue;margin-right:5px;color: blueviolet;">{{tag}}</button>
-                {% endfor %}
+                {% if update %}
+
+                    <p class="tag-show">Existing tags:</p>
+                    {% for tag in project.tags.all %}
+                        <div class="tag-form" data-tag ="{{tag.name}}" data-project="{{project.id}}">{{tag}} <span>&#10539;</span></div>
+                    {% endfor %}
+
+                {% endif %}
                 <div class="form__field">
                     
                     <label for="formInput#text">Add tags </label>
-                    <textarea name="tagAdding" class="input" placeholder="Add tags here and seperat each them with a single space"></textarea>
+                    <textarea name="tagAdding" class="input" placeholder="Add tags here and separate each them with a single space"></textarea>
                     
                 </div>
                 
