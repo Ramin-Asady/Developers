@@ -1,4 +1,5 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view , permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from .serializers import ProjectSerializer , ProfileSerializer
@@ -6,6 +7,7 @@ from projects.models import Project
 from users.models import Profile
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getRoutes(request):
 
     routes=[
@@ -28,6 +30,7 @@ def getProjects(request):
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getProject(request,pk):
 
        project=Project.objects.get(id=pk)
@@ -35,6 +38,7 @@ def getProject(request,pk):
        return Response(serializer.data)
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getProfiles(request):
 
        profiles=Profile.objects.all()
@@ -42,6 +46,7 @@ def getProfiles(request):
        return Response(serializer.data)
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getUserProfile(request,pk):
 
        userProfile=Profile.objects.get(id=pk)
