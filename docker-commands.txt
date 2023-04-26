@@ -1,0 +1,12 @@
+1- First perform   ** docker build -tag <image name> . **
+
+2- In order to build and run the container perform this command on windows:
+
+        ** docker build --name <container name> -p <your desired port>:3000 -v %cd%:/code <image name> **
+         
+         If you use a Mac or Linux machine the command should be like this:
+
+         ** docker build --name <container name> -p <your desired port>:3000 -v $(pwd):/code <image name> **
+
+
+
