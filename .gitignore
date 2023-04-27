@@ -1,12 +1,3 @@
-#sqlite file is a binary file that makes trouble for hit commands
-**/*.sqlite3
-
-#making sure that the line above works
-.sqlite3
-
-#making sure that the line above works
-db.sqlite3
-
 #pycache files are also binary files that make same problem
 **/*.pyc
 
