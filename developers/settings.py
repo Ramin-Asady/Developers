@@ -3,15 +3,19 @@ from datetime import timedelta
 import os
 from pathlib import Path
 
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=9#)(wr1clvxww$j%x1xj2j*!z)6()f%_f2vym8#ydynb784yh'
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -125,10 +129,21 @@ WSGI_APPLICATION = 'developers.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env("DB_NAME"),
+        'USER': env("DB_USER"),
+        'PASSWORD': env("DB_PASSWORD"),
+        'HOST': env("DB_HOST"),
+        'PORT': env("DB_PORT"),
     }
 }
 
@@ -175,12 +190,12 @@ CORS_ALLOW_ALL_ORIGINS = True
 PASSWORD_RESET_TIMEOUT = 600
 
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL='yourMail@hotmail.com'  # You don't have to set Default Email. In my case I couldn't send reset password email via Hotmail .therefore I had to configure it like this
-EMAIL_HOST='smtp.office365.com'   # The host address for hotmail provider
-EMAIL_PORT= 587
-EMAIL_USE_TLS= True
-EMAIL_HOST_USER= 'yourMail@hotmail.com'   # This is that email which site emails will be send from it to users. For me it's that email account I defined for Default Email.
-EMAIL_HOST_PASSWORD='*************' #It's better use app password instead of your real password.
+DEFAULT_FROM_EMAIL= env("DEFAULT_FROM_EMAIL")
+EMAIL_HOST=env("EMAIL_HOST")
+EMAIL_PORT= env("EMAIL_PORT")
+EMAIL_USE_TLS= env("EMAIL_USE_TLS")
+EMAIL_HOST_USER= env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD= env("EMAIL_HOST_PASSWORD")
 
 
 # Static files (CSS, JavaScript, Images)

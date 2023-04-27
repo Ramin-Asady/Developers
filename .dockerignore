@@ -1,3 +1,4 @@
 docker-commands.txt
 README.md
 .gitignore
+*.env
